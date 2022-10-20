@@ -14,15 +14,24 @@ function getRandomHexColor() {
   
   function onStartBtnClick() {
     timerId = setInterval(changeBackgroundColor, 1000);
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
+    switchBtn(startBtn, stopBtn);
   }
   
   function onStopBtnClick() {
     clearInterval(timerId);
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
+    switchBtn(startBtn, stopBtn);
   }
+  
+  function switchBtn(...buttons) {
+    for (const btn of buttons) {
+      if (btn.hasAttribute('disabled')) {
+        btn.removeAttribute('disabled');
+      } else {
+        btn.setAttribute('disabled', '');
+      }
+    }
+  }
+  
   
   function changeBackgroundColor() {
     document.body.style.backgroundColor = getRandomHexColor();
